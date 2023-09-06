@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -16,7 +15,6 @@ public class ProdutoDAO {
 	Connection conn;
 	PreparedStatement ps;
 	ResultSet rs;
-	ArrayList<Produto> lista =new ArrayList<>();
 	
 	public void cadastrarProduto(Produto objproduto) throws SQLException, ClassNotFoundException {
 
@@ -38,32 +36,6 @@ public class ProdutoDAO {
 			JOptionPane.showMessageDialog(null, "ProdutoDAO Cadastrar " + e);
 		}
 	}
-	
-	public ArrayList<Produto> pesquisarProduto() throws ClassNotFoundException, SQLException {
-		String sql = "Select * From Produto";
-		conn = new GenericDAO().getConnection();
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				Produto objproduto = new Produto();
-				objproduto.setCodigo(rs.getInt("codigo"));
-				objproduto.setNome(rs.getString("nome"));
-				objproduto.setData(rs.getString("data"));
-				
-				lista.add(objproduto);
-			}
-			
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "ProdutoDAO Pesquisar " + e);
-			
-		}
-		
-		return lista;
-			
-		}
 	
 
 	public void editarProduto(Produto objproduto) throws ClassNotFoundException, SQLException {
