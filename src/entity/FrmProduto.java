@@ -3,7 +3,6 @@ package entity;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,8 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import DAO.ProdutoDAO;
 
@@ -34,7 +31,7 @@ public class FrmProduto {
 		JLabel laa = new JLabel("                                                                                                                                                                                    ");
 		p.add(laa);
 
-		JLabel l = new JLabel("Código:");
+		JLabel l = new JLabel("CÃ³digo:");
 		p.add(l);
 
 		JTextField t = new JTextField(9);
@@ -56,10 +53,6 @@ public class FrmProduto {
 		JLabel laaa = new JLabel("                                                                                                                                                                                    ");
 		p.add(laaa);
 		
-		JTable tabelaProduto = new JTable();
-		tabelaProduto.setName("Cadastro de Produtos");
-		tabelaProduto.setSize(60, 20);
-		tabelaProduto.setLocation(700, 300);
 
 		JButton bcad = new JButton("CADASTRAR");
 		bcad.setLocation(200,500);
@@ -72,9 +65,6 @@ public class FrmProduto {
 		JButton bedita = new JButton("EDITAR");
 		bedita.setLocation(200,500);
 		bedita.setSize(100,100);
-		
-		JButton bpesquisa = new JButton("PESQUISAR");
-		bpesquisa.setLocation(200,500);
 		
 		JButton blimpa = new JButton("LIMPAR");
 		blimpa.setLocation(200,500);
@@ -145,34 +135,6 @@ public class FrmProduto {
 				}
 
 			});
-
-			bpesquisa.addActionListener(new ActionListener() {
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		try {
-			DefaultTableModel model = (DefaultTableModel) tabelaProduto.getModel();
-			model.setNumRows(0);
-			
-			
-			ArrayList<Produto> lista = pDao.pesquisarProduto();
-			
-			for(int i = 0; i < lista.size(); i ++) {
-				model.addRow(new Object[] {
-					lista.get(i).getCodigo(),
-					lista.get(i).getNome(),
-					lista.get(i).getData()
-					
-				});
-				
-			}
-			
-		} catch (Exception e2) {
-			
-		}
-	}
-			});
 			
 			blimpa.addActionListener(new ActionListener() {
 				
@@ -192,9 +154,7 @@ public class FrmProduto {
 		p.add(bcad);
 		p.add(bexclui);
 		p.add(bedita);
-		p.add(bpesquisa);
 		p.add(blimpa);
-		p.add(tabelaProduto);
 		f.add(p);
 		f.setVisible(true);
 
